@@ -1,29 +1,111 @@
 "use client";
 
 import Image from "next/image";
-import { ConnectButton } from "thirdweb/react";
 import thirdwebIcon from "@public/thirdweb.svg";
 import { client } from "./client";
+import {
+  createThirdwebClient,
+  getContract,
+  resolveMethod,
+  prepareContractCall,
+} from "thirdweb";
+import {
+  ConnectButton,
+  TransactionButton,
+  useSendTransaction,
+  useActiveWallet,
+  useReadContract,
+} from "thirdweb/react";
+import { defineChain } from "thirdweb/chains";
+
+const CHAIN = defineChain(80002); // Polygon Amoy TEST Network
+const TOKEN_ADDRESS = "0x227f8D3406C2a9cfCD318e6De8763C6A78285C33";
+const AIRDROP_ADDRESS = "0x162341e382780d51f53780B1ECeCE34c510D7ebd";
+const BATCH = [
+  { recipient: "0xb3b6AAadB03e0E78c1Ec6e6FD492e8dBC5119EF4", amount: BigInt(1e18) }, // rcnavas3
+  { recipient: "0x52162F5FC13E11e0Edd13C1D03538469e8315377", amount: BigInt(1e18) }, // rcnavas4
+]; 
 
 export default function Home() {
+  const wallet = useActiveWallet();
+  // connect to Airdrop contract
+  const airdrop = getContract({
+    client,
+    chain: CHAIN,
+    address: AIRDROP_ADDRESS, // OLAGG Airdrop contractmon Polygon
+  });
+  const token = getContract({
+    client,
+    chain: CHAIN,
+    address: TOKEN_ADDRESS, // ERC20 Token
+  });
+
+  // Prepare transaction
+  const transaction = prepareContractCall({
+    contract: airdrop,
+    method:
+      "function airdropERC20(address _tokenAddress, (address recipient, uint256 amount)[] _contents)",
+    params: [TOKEN_ADDRESS, BATCH],
+  });
+
+  // Read Token Symbol 
+  const { data: token_symbol, isLoading } = useReadContract({
+    contract: token,
+    method: "function symbol() view returns (string)",
+    params: [],
+  });
+
   return (
     <main className="p-4 pb-10 min-h-[100vh] flex items-center justify-center container max-w-screen-lg mx-auto">
       <div className="py-20">
         <Header />
-
         <div className="flex justify-center mb-20">
           <ConnectButton
             client={client}
+            chain={CHAIN}
             appMetadata={{
-              name: "Example App",
+              name: "Airdrop Test App",
               url: "https://example.com",
             }}
           />
+          {wallet ? (
+            <TransactionButton
+              transaction={() => transaction}
+              onTransactionConfirmed={(receipt) =>
+                alert("OK: " + JSON.stringify(receipt))
+              }
+              onError={(error) => alert("Error: " + JSON.stringify(error))}
+            >
+              Confirm Airdrop
+            </TransactionButton>
+          ) : (
+            <div>Connect to Send Airdrop</div>
+          )}
         </div>
-
+        <div className="flex justify-center mb-20">
+          <BatchDetails token_symbol={token_symbol} />
+        </div>
         <ThirdwebResources />
       </div>
     </main>
+  );
+}
+
+function BatchDetails(props: { token_symbol: string | undefined }) {
+  return (
+    <div>
+      <h3>
+        Will send the following transfers of {props.token_symbol} from Connected
+        Wallet:
+      </h3>
+      <ul>
+        {BATCH.map((i) => (
+          <li key={i.recipient}>
+            To: {i.recipient} Amount: {i.amount.toString()}
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }
 
