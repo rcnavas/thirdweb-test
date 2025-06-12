@@ -1,9 +1,9 @@
 "use client";
 
-import { PayEmbed } from "thirdweb/react";
+import { getDefaultToken, PayEmbed } from "thirdweb/react";
 import { defineChain } from "thirdweb";
 import { client } from "@/app/client";
-import { SetStateAction, useState } from "react";
+import { useState } from "react";
 import { avalanche, ethereum, polygon, base, bsc } from "thirdweb/chains";
 
 const ronin = defineChain(2020);
@@ -18,9 +18,11 @@ export default function Page() {
           connectOptions={{
             chain: avalanche,
             chains: [avalanche, ethereum, polygon, base, bsc, ronin],
+            
           }}
           locale="es_ES"
           payOptions={{
+            showThirdwebBranding: false,
             metadata: {
               name: "Test Product",
               image:
@@ -30,7 +32,7 @@ export default function Page() {
             paymentInfo: {
               chain: avalanche,
               sellerAddress: "0xd4e8e0b74770880F42cEA9D41fB15899E9F4A45D",
-              amount: "0.0001",
+              amount: "0.0001"
             },
             onPurchaseSuccess: (info) => setPurchaseStatus(info),
             purchaseData: {
