@@ -61,7 +61,11 @@ export default function Page() {
         />
       </div>
       <div className="basis-1/3">
-        <code>{JSON.stringify(purchaseStatus, undefined, "\n")}</code>
+        <pre className="bg-gray-100 p-4 rounded-lg overflow-auto">
+          <code className="text-sm">
+            {JSON.stringify(purchaseStatus, null, 2)}
+          </code>
+        </pre>
       </div>
     </div>
   );
