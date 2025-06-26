@@ -7,7 +7,6 @@ import { avalanche, ethereum, polygon, base, bsc } from "thirdweb/chains";
 import { createWallet, walletConnect } from "thirdweb/wallets";
 import { client } from "@/app/client";
 
-
 const ronin = defineChain(2020);
 const wallets = [
   walletConnect(),
@@ -143,21 +142,19 @@ export default function Page() {
           client={client}
           chain={polygon}
           seller="0xd4e8e0b74770880F42cEA9D41fB15899E9F4A45D"
-          amount={10000n}
+          amount="0.001"
           tokenAddress="0x3c499c542cef5e3811e1192ce70d8cc03d5c3359"
           feePayer="seller"
           name="Test Product\nNintendo eShop $10"
           description="Nintendo eShop $10"
           image="https://elsalvadorjuegosdigitales.com/wp-content/uploads/2023/05/WhatsApp-Image-2022-06-15-at-1.58.47-PM.jpeg"
+          locale="es_ES"
+          supportedTokens={supportedTokens}
           purchaseData={{
             order_id: "order-test-1",
           }}
-          onSuccess={() => setPurchaseStatus({ result: "success" })}
-          onError={() => setPurchaseStatus({ result: "error" })}
           connectOptions={{
-            chains: [avalanche, ethereum, polygon, base, bsc, ronin],
             wallets: wallets,
-            showAllWallets: true,
             accountAbstraction: {
               chain: polygon,
               sponsorGas: true,
@@ -171,8 +168,8 @@ export default function Page() {
               projectId: "7bbf5f26a47685f66a039c3e057b8b02",
             },
           }}
-          locale="es_ES"
-          supportedTokens={supportedTokens}
+          onSuccess={() => setPurchaseStatus({ result: "success" })}
+          onError={() => setPurchaseStatus({ result: "error" })}
         />
       </div>
       <div className="basis-1/3">

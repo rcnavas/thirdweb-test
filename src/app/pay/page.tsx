@@ -4,19 +4,19 @@ import { useState } from "react";
 import { getDefaultToken, PayEmbed } from "thirdweb/react";
 import { defineChain, NATIVE_TOKEN_ADDRESS } from "thirdweb";
 import { avalanche, ethereum, polygon, base, bsc } from "thirdweb/chains";
-import { createWallet, walletConnect } from "thirdweb/wallets";
-import {
-  smartWallet,
-  DEFAULT_ACCOUNT_FACTORY_V0_7,
-} from "thirdweb/wallets/smart";
+import { createWallet, smartWallet, walletConnect } from "thirdweb/wallets";
 import { client } from "@/app/client";
 
 const ronin = defineChain(2020);
 const wallets = [
+  walletConnect(),
+  smartWallet({
+    chain: polygon,
+    sponsorGas: true,
+  }),
   createWallet("io.metamask"),
   createWallet("com.roninchain.wallet"),
   createWallet("io.rabby"),
-  walletConnect(),
   createWallet("com.binance.wallet"),
   createWallet("com.coinbase.wallet"),
 ];
@@ -145,9 +145,8 @@ export default function Page() {
         <PayEmbed
           client={client}
           connectOptions={{
-            chains: [avalanche, ethereum, polygon, base, bsc, ronin],
             wallets: wallets,
-            showAllWallets: true,
+            recommendedWallets: wallets,
             accountAbstraction: {
               chain: polygon,
               sponsorGas: true,
@@ -163,6 +162,7 @@ export default function Page() {
           }}
           locale="es_ES"
           supportedTokens={supportedTokens}
+          
           payOptions={{
             showThirdwebBranding: false,
             metadata: {
@@ -174,7 +174,7 @@ export default function Page() {
             paymentInfo: {
               chain: polygon,
               sellerAddress: "0xd4e8e0b74770880F42cEA9D41fB15899E9F4A45D",
-              amount: "0.01",
+              amount: "0.001",
               feePayer: "receiver",
               token: getDefaultToken(polygon, "USDC"),
             },
