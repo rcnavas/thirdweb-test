@@ -10,10 +10,6 @@ import { client } from "@/app/client";
 const ronin = defineChain(2020);
 const wallets = [
   walletConnect(),
-  smartWallet({
-    chain: polygon,
-    sponsorGas: true,
-  }),
   createWallet("io.metamask"),
   createWallet("com.roninchain.wallet"),
   createWallet("io.rabby"),
@@ -139,14 +135,17 @@ const supportedTokens = {
 
 export default function Page() {
   const [purchaseStatus, setPurchaseStatus] = useState<any>();
+  const updateStatus = (status: any) => {
+    console.log(status);
+    setPurchaseStatus(status);
+  };
   return (
-    <div className="flex flex-row">
-      <div className="basis-2/3 justify-center">
+    <div className="flex md:flex-row flex-col justify-center justify-items-center">
+      <div className="md:basis-2/3 basis-full">
         <PayEmbed
           client={client}
           connectOptions={{
             wallets: wallets,
-            recommendedWallets: wallets,
             accountAbstraction: {
               chain: polygon,
               sponsorGas: true,
@@ -159,14 +158,19 @@ export default function Page() {
             walletConnect: {
               projectId: "7bbf5f26a47685f66a039c3e057b8b02",
             },
+            appMetadata: {
+              name: "RCNAVAS Test",
+              description: "RCNAVAS Thirdweb Test",
+            },
+            showAllWallets: true,
           }}
           locale="es_ES"
           supportedTokens={supportedTokens}
-          
           payOptions={{
             showThirdwebBranding: false,
             metadata: {
-              name: "Test Product\nNintendo eShop $10",
+              name: "Nintendo Digital Code",
+              description: "Nintendo eShop $10",
               image:
                 "https://elsalvadorjuegosdigitales.com/wp-content/uploads/2023/05/WhatsApp-Image-2022-06-15-at-1.58.47-PM.jpeg",
             },
@@ -178,18 +182,17 @@ export default function Page() {
               feePayer: "receiver",
               token: getDefaultToken(polygon, "USDC"),
             },
-            onPurchaseSuccess: (info) => setPurchaseStatus(info),
+            onPurchaseSuccess: (info) => updateStatus(info),
             purchaseData: {
               order_id: "order-test-1",
             },
           }}
         />
       </div>
-      <div className="basis-1/3">
-        <pre className="bg-gray-100 p-4 rounded-lg overflow-auto">
-          <code className="text-sm">
-            {JSON.stringify(purchaseStatus, null, 2)}
-          </code>
+      <div className="md:basis-1/3 basis-full">
+        <pre className="bg-gray-100 text-sm text-black p-4 rounded-lg overflow-auto">
+        Result:
+        {JSON.stringify(purchaseStatus, null, 2)}  
         </pre>
       </div>
     </div>
