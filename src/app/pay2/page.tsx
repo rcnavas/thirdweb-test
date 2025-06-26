@@ -136,8 +136,8 @@ const supportedTokens = {
 export default function Page() {
   const [purchaseStatus, setPurchaseStatus] = useState<any>();
   return (
-    <div className="flex flex-row">
-      <div className="basis-2/3 justify-center">
+    <div className="flex md:flex-row flex-col justify-center justify-items-center">
+      <div className="md:basis-2/3 basis-full">
         <CheckoutWidget
           client={client}
           chain={polygon}
@@ -145,8 +145,8 @@ export default function Page() {
           amount="0.001"
           tokenAddress="0x3c499c542cef5e3811e1192ce70d8cc03d5c3359"
           feePayer="seller"
-          name="Test Product\nNintendo eShop $10"
-          description="Nintendo eShop $10"
+          name="Nintendo eShop $10"
+          description="Nintendo eShop digital code for $10"
           image="https://elsalvadorjuegosdigitales.com/wp-content/uploads/2023/05/WhatsApp-Image-2022-06-15-at-1.58.47-PM.jpeg"
           locale="es_ES"
           supportedTokens={supportedTokens}
@@ -164,6 +164,10 @@ export default function Page() {
               title: "Conectar a OLAGG",
               showThirdwebBranding: false,
             },
+            appMetadata: {
+              name: "RCNAVAS Test",
+              description: "RCNAVAS Thirdweb Test",
+            },
             walletConnect: {
               projectId: "7bbf5f26a47685f66a039c3e057b8b02",
             },
@@ -172,11 +176,10 @@ export default function Page() {
           onError={() => setPurchaseStatus({ result: "error" })}
         />
       </div>
-      <div className="basis-1/3">
-        <pre className="bg-gray-100 p-4 rounded-lg overflow-auto">
-          <code className="text-sm">
-            {JSON.stringify(purchaseStatus, null, 2)}
-          </code>
+      <div className="md:basis-1/3 basis-full">
+        <pre className="bg-gray-100 text-sm text-black p-4 rounded-lg overflow-auto">
+          Result:
+          {JSON.stringify(purchaseStatus, null, 2)}
         </pre>
       </div>
     </div>
