@@ -136,7 +136,7 @@ const supportedTokens = {
 export default function Page() {
   const [purchaseStatus, setPurchaseStatus] = useState<any>();
   const updateStatus = (status: any) => {
-    console.log(status);
+    console.log("Received callback from PayEmbed: ", JSON.stringify(status, null, 2));
     setPurchaseStatus(status);
   };
   return (
