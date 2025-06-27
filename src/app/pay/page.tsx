@@ -156,7 +156,7 @@ export default function Page() {
               showThirdwebBranding: false,
             },
             walletConnect: {
-              projectId: "7bbf5f26a47685f66a039c3e057b8b02",
+              projectId: process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID,
             },
             appMetadata: {
               name: "RCNAVAS Test",
