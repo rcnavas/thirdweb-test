@@ -174,6 +174,7 @@ export default function Page() {
           }}
           onSuccess={() => setPurchaseStatus({ result: "success" })}
           onError={() => setPurchaseStatus({ result: "error" })}
+          onCancel={() => setPurchaseStatus({ result: "cancelled" })}
         />
       </div>
       <div className="md:basis-1/3 basis-full">
