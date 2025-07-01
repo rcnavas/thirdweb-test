@@ -142,7 +142,7 @@ export default function Page() {
           client={client}
           chain={polygon}
           seller="0xd4e8e0b74770880F42cEA9D41fB15899E9F4A45D"
-          amount="0.001"
+          amount="1.00"
           tokenAddress="0x3c499c542cef5e3811e1192ce70d8cc03d5c3359"
           feePayer="seller"
           name="Nintendo eShop $10"
