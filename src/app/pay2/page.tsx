@@ -149,12 +149,12 @@ export default function Page() {
           description="Nintendo eShop digital code for $10"
           image="https://elsalvadorjuegosdigitales.com/wp-content/uploads/2023/05/WhatsApp-Image-2022-06-15-at-1.58.47-PM.jpeg"
           locale="es_ES"
-          supportedTokens={supportedTokens}
           purchaseData={{
             order_id: "order-test-1",
           }}
           connectOptions={{
             wallets: wallets,
+            chains: [ethereum, polygon, avalanche, ronin, base, bsc],
             accountAbstraction: {
               chain: polygon,
               sponsorGas: true,
