@@ -9,7 +9,7 @@ export default function Page() {
   return (
     <div className="h-dvh w-dvw fixed top-0 left-0 m-0 p-0">
       <Spline
-        scene="https://draft.spline.design/A9VUGldUFpYuPH6k/scene.splinecode"
+        scene="https://prod.spline.design/Ta0wTlrqf-rlGl9Q/scene.splinecode"
         onLoad={onLoad}
       />
     </div>
