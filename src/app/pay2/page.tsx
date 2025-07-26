@@ -4,7 +4,7 @@ import { useState } from "react";
 import { CheckoutWidget, getDefaultToken, PayEmbed } from "thirdweb/react";
 import { defineChain, NATIVE_TOKEN_ADDRESS } from "thirdweb";
 import { avalanche, ethereum, polygon, base, bsc } from "thirdweb/chains";
-import { createWallet, walletConnect } from "thirdweb/wallets";
+import { createWallet, walletConnect, inAppWallet } from "thirdweb/wallets";
 import { client } from "@/app/client";
 
 const ronin = defineChain(2020);
@@ -16,6 +16,18 @@ const wallets = [
   createWallet("com.binance.wallet"),
   createWallet("com.coinbase.wallet"),
 ];
+
+const walletWithAuth = inAppWallet({
+  auth: { options: ["wallet"] },
+  executionMode: {
+    mode: "EIP7702",
+    sponsorGas: true,
+  },
+  metadata: {
+    name: "OLAGG Shop",
+  },
+});
+
 const supportedTokens = {
   /* Ethereum */
   1: [
@@ -154,7 +166,7 @@ export default function Page() {
             order_id: "order-test-1",
           }}
           connectOptions={{
-            wallets: wallets,
+            wallets: [walletWithAuth],
             connectModal: {
               size: "compact",
               title: "Conectar a OLAGG",
@@ -166,11 +178,7 @@ export default function Page() {
             },
             walletConnect: {
               projectId: process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID,
-            },
-            accountAbstraction: {
-              chain: polygon,
-              sponsorGas: true,
-            },
+            }
           }}
           onSuccess={() => setPurchaseStatus({ result: "success" })}
           onError={() => setPurchaseStatus({ result: "error" })}
