@@ -167,6 +167,10 @@ export default function Page() {
             walletConnect: {
               projectId: process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID,
             },
+            accountAbstraction: {
+              chain: polygon,
+              sponsorGas: true,
+            },
           }}
           onSuccess={() => setPurchaseStatus({ result: "success" })}
           onError={() => setPurchaseStatus({ result: "error" })}
