@@ -29,7 +29,8 @@ const walletWithAuth = inAppWallet({
 });
 
 const supportedTokens = {
-  /* Ethereum */
+  /*
+  // Ethereum 
   1: [
     { address: NATIVE_TOKEN_ADDRESS, name: "ETH", symbol: "ETH" },
     {
@@ -58,7 +59,7 @@ const supportedTokens = {
       symbol: "USDT",
     },
   ],
-  /* Base */
+  // Base 
   8453: [
     { address: NATIVE_TOKEN_ADDRESS, name: "ETH", symbol: "ETH" },
     {
@@ -82,7 +83,7 @@ const supportedTokens = {
       symbol: "USDT",
     },
   ],
-  /* Avalanche */
+  // Avalanche 
   43114: [
     { address: NATIVE_TOKEN_ADDRESS, name: "AVAX", symbol: "AVAX" },
     {
@@ -96,7 +97,7 @@ const supportedTokens = {
       symbol: "USDT",
     },
   ],
-  /* Ronin */
+  // Ronin 
   2020: [
     { address: NATIVE_TOKEN_ADDRESS, name: "RON", symbol: "RON" },
     {
@@ -115,7 +116,7 @@ const supportedTokens = {
       symbol: "PIXELS",
     },
   ],
-  /* Abstract */
+  // Abstract 
   2741: [
     { address: NATIVE_TOKEN_ADDRESS, name: "ETH", symbol: "ETH" },
     {
@@ -124,7 +125,8 @@ const supportedTokens = {
       symbol: "YGG",
     },
   ],
-  /* Polygon */
+  */
+  // Polygon
   137: [
     { address: NATIVE_TOKEN_ADDRESS, name: "POL", symbol: "POL" },
     {
@@ -156,6 +158,7 @@ export default function Page() {
           seller="0xd4e8e0b74770880F42cEA9D41fB15899E9F4A45D"
           amount="0.01"
           tokenAddress="0x3c499c542cef5e3811e1192ce70d8cc03d5c3359"
+          supportedTokens={supportedTokens}
           feePayer="seller"
           name="Nintendo eShop $10"
           description="Nintendo eShop digital code for $10"
