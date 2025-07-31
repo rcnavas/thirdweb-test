@@ -166,7 +166,7 @@ export default function Page() {
             order_id: "order-test-1",
           }}
           connectOptions={{
-            wallets: [walletWithAuth],
+            wallets: wallets,
             connectModal: {
               size: "compact",
               title: "Conectar a OLAGG",
