@@ -150,9 +150,10 @@ const supportedTokens = {
 export default function Page() {
   const [purchaseStatus, setPurchaseStatus] = useState<any>();
   return (
-    <div className="flex md:flex-row flex-col justify-center justify-items-center">
-      <div className="md:basis-2/3 basis-full">
+    <div className="flex md:flex-row flex-col items-center justify-center">
+      <div className="md:basis-2/3 basis-full w-svw p-2">
         <CheckoutWidget
+          style={{"width": "97svw", "maxWidth": "450px", "minWidth": "350px"}}
           client={client}
           chain={polygon}
           seller="0xd4e8e0b74770880F42cEA9D41fB15899E9F4A45D"
@@ -188,7 +189,7 @@ export default function Page() {
           onCancel={() => setPurchaseStatus({ result: "cancelled" })}
         />
       </div>
-      <div className="md:basis-1/3 basis-full">
+      <div className="md:basis-1/3 basis-full w-svw p-2">
         <pre className="bg-gray-100 text-sm text-black p-4 rounded-lg overflow-auto">
           Result:
           {JSON.stringify(purchaseStatus, null, 2)}
