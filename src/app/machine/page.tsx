@@ -11,6 +11,7 @@ export default function Page() {
       <Spline
         scene="https://prod.spline.design/2tiYCWiMhmKzkiSa/scene.splinecode"
         onLoad={onLoad}
+        
       />
     </div>
   );
