@@ -2,7 +2,6 @@
 import { SplineEvent } from "@splinetool/react-spline";
 import Spline from "@splinetool/react-spline/next";
 import { Application } from "@splinetool/runtime";
-import { on } from "events";
 
 export default function Page() {
   function onLoad(spline: Application) {
