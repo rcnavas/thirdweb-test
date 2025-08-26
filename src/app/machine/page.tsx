@@ -27,7 +27,7 @@ export default function Page() {
           console.log("Not Done Yet...");
         }
       }
-    }, 1000);
+    }, 2000);
   }
   if (!done) {
     return (
