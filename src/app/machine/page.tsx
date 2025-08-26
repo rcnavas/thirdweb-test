@@ -2,27 +2,48 @@
 import { SplineEvent } from "@splinetool/react-spline";
 import Spline from "@splinetool/react-spline/next";
 import { Application } from "@splinetool/runtime";
+import { useRef, useState } from "react";
 
 export default function Page() {
+  const scene = useRef<Application | null>();
+
+  const [done, setDone] = useState(false);
+  const [prize, setPrize] = useState(false);
+
   function onLoad(spline: Application) {
-    spline.setVariables({ X: 0, Z: 0, Counter: 5 });
+    spline.setVariables({ X: 0, Z: 0, Counter: 10 });
+    scene.current = spline;
+    let interval = setInterval(() => {
+      if (scene.current) {
+        if (scene.current.getVariable("Done") === true) {
+          clearInterval(interval);
+          setPrize(scene.current.getVariable("Prize") as boolean);
+          setDone(true);
+          console.log(
+            "DONE! Prize is ",
+            scene.current.getVariable("Prize") as boolean
+          );
+        } else {
+          console.log("Not Done Yet...");
+        }
+      }
+    }, 1000);
   }
-  function onSplineMouseDown(e: SplineEvent) {
-    if (e.target.name === "Gift Box") {
-      console.log("Gift Box has been clicked!", e);
-    }
+  if (!done) {
+    return (
+      <div className="h-dvh w-dvw fixed top-0 left-0 m-0 p-0 bg-gradient-to-b from-[#D920F4] to-[#300862]">
+        <Spline
+          scene="https://prod.spline.design/2tiYCWiMhmKzkiSa/scene.splinecode"
+          onLoad={onLoad}
+        />
+      </div>
+    );
+  } else {
+    return (
+      <div className="h-dvh w-dvw fixed top-0 left-0 m-0 p-0 bg-gradient-to-b from-[#D920F4] to-[#300862]">
+        <h1>DONE!</h1>
+        {prize && <h2>You Won!</h2>}
+      </div>
+    );
   }
-  function onSplineStart(e: SplineEvent) {
-    console.log("Spline Scene Started!", e);
-  }
-  return (
-    <div className="h-dvh w-dvw fixed top-0 left-0 m-0 p-0 bg-gradient-to-b from-[#D920F4] to-[#300862]">
-      <Spline
-        scene="https://prod.spline.design/2tiYCWiMhmKzkiSa/scene.splinecode"
-        onLoad={onLoad}
-        onSplineMouseDown={onSplineMouseDown}
-        onSplineStart={onSplineStart}
-      />
-    </div>
-  );
 }
