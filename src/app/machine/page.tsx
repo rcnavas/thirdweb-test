@@ -11,7 +11,7 @@ export default function Page() {
   const [prize, setPrize] = useState(false);
 
   function onLoad(spline: Application) {
-    spline.setVariables({ X: 0, Z: 0, Counter: 10 });
+    spline.setVariables({ X: 0, Z: 0 });
     scene.current = spline;
     let interval = setInterval(() => {
       if (scene.current) {
