@@ -9,9 +9,8 @@ export default function Page() {
 
   const [done, setDone] = useState(false);
   const [prize, setPrize] = useState(false);
-
-  let done_x = 0;
-  let done_z = 0;
+  const [done_x, setDone_x] = useState(0);
+  const [done_z, setDone_z] = useState(0);
 
   function onLoad(spline: Application) {
     spline.setVariables({ X: 0, Z: 0 });
@@ -20,15 +19,15 @@ export default function Page() {
       if (scene.current) {
         if (scene.current.getVariable("Done") === true) {
           clearInterval(interval);
+          setDone_x(scene.current.getVariable("Done-X") as number);
+          setDone_z(scene.current.getVariable("Done-Z") as number);
           setPrize(scene.current.getVariable("Prize") as boolean);
           setDone(true);
-          done_x = scene.current.getVariable("Done-X") as number;
-          done_z = scene.current.getVariable("Done-Z") as number;
           console.log(
             "DONE! Prize is ",
             scene.current.getVariable("Prize") as boolean,
             done_x,
-            done_z  
+            done_z
           );
         } else {
           console.log("Not Done Yet...");
