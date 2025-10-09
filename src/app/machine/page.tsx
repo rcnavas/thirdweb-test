@@ -38,7 +38,7 @@ export default function Page() {
 
   if (!done) {
     return (
-      <div className="h-dvh w-dvw fixed top-0 left-0 m-0 p-0 bg-gradient-to-b from-[#D920F4] to-[#300862]">
+      <div className="h-dvh w-dvw fixed top-0 left-0 m-0 p-0 bg-linear-to-b from-[#D920F4] to-[#300862]">
         <Spline
           scene="https://prod.spline.design/2tiYCWiMhmKzkiSa/scene.splinecode"
           onLoad={onLoad}
@@ -47,7 +47,7 @@ export default function Page() {
     );
   } else {
     return (
-      <div className="h-dvh w-dvw fixed top-0 left-0 m-0 p-0 bg-gradient-to-b from-[#D920F4] to-[#300862]">
+      <div className="h-dvh w-dvw fixed top-0 left-0 m-0 p-0 bg-linear-to-b from-[#D920F4] to-[#300862]">
         <h1>DONE!</h1>
         {prize && <h2>You Won!</h2>}
         Position: X = {done_x} Z = {done_z}
