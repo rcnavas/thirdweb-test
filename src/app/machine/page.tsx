@@ -5,7 +5,7 @@ import { Application } from "@splinetool/runtime";
 import { useRef, useState } from "react";
 
 export default function Page() {
-  const scene = useRef<Application | null>();
+  const scene = useRef<Application | null>(null);
 
   const [done, setDone] = useState(false);
   const [prize, setPrize] = useState(false);
