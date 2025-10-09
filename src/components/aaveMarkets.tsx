@@ -10,7 +10,7 @@ import { useState } from "react";
 export default function AaveMarkets() {
   const [selectedChainId, setSelectedChainId] = useState(1);
   const { data: chains } = useAaveChains({
-    filter: ChainsFilter.MAINNET_ONLY,
+    filter: ChainsFilter.ALL,
   });
   const { data, loading, error } = useAaveMarkets({
     chainIds: [chainId(selectedChainId)]
