@@ -3,29 +3,29 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
-    "@aave/react": "^0.6.1",
+    "@aave/react": "^0.7.0",
     "@splinetool/react-spline": "^4.1.0",
-    "@splinetool/runtime": "^1.10.74",
+    "@splinetool/runtime": "^1.10.77",
     "next": "^15.5.4",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
-    "thirdweb": "^5.108.8"
+    "thirdweb": "^5.108.9"
   },
   "devDependencies": {
-    "@types/node": "^20.19.19",
-    "@types/react": "^18.3.25",
-    "@types/react-dom": "^18.3.7",
+    "@types/node": "^24.7.0",
+    "@types/react": "^19.2.2",
+    "@types/react-dom": "^19.2.1",
     "autoprefixer": "^10.4.21",
-    "eslint": "^8.57.1",
-    "eslint-config-next": "14.1.0",
+    "eslint": "^9.37.0",
+    "eslint-config-next": "15.5.4",
     "postcss": "^8.5.6",
-    "tailwindcss": "^3.4.18",
+    "tailwindcss": "^4.1.14",
     "typescript": "^5.9.3"
   }
 }
