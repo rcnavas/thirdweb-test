@@ -12,7 +12,7 @@
     "@aave/react": "^0.7.0",
     "@splinetool/react-spline": "^4.1.0",
     "@splinetool/runtime": "^1.10.84",
-    "next": "^15.5.6",
+    "next": "^15.5.7",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "thirdweb": "^5.109.1"
